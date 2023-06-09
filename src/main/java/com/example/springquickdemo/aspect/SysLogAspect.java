@@ -21,6 +21,7 @@ import java.util.Date;
 @Aspect
 @Component
 public class SysLogAspect {
+
     @Autowired
     private SysLogService sysLogService;
     private static Logger logger = LoggerFactory.getLogger(SysLogAspect.class);

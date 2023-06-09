@@ -22,7 +22,7 @@ public class SysLogController {
      */
     @GetMapping("/page")
     @com.example.springquickdemo.annotation.SysLog("page")
-    public void page(@Validated SysLog sysLog, PageParam<SysLog> page) {
+    public void page(SysLog sysLog, PageParam<SysLog> page) {
 
         System.out.println(sysLog);
         System.out.println(page);
