@@ -4,10 +4,12 @@ import com.example.springquickdemo.response.ResponseEnum;
 import com.example.springquickdemo.response.ServerResponseEntity;
 import lombok.Getter;
 
+/**
+ * @author lian
+ */
 @Getter
 public class CommonBindException extends RuntimeException{
-   
-    //@java.io.Serial
+
     private static final long serialVersionUID = -4137688758944857209L;
 
     /**

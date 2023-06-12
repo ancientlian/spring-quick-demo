@@ -7,24 +7,26 @@ import com.example.springquickdemo.util.IpHelper;
 
 import com.example.springquickdemo.util.Json;
 import com.example.springquickdemo.model.SysLog;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 
+/**
+ * @author lian
+ */
 @Aspect
 @Component
+@Slf4j
 public class SysLogAspect {
 
     @Autowired
     private SysLogService sysLogService;
-    private static Logger logger = LoggerFactory.getLogger(SysLogAspect.class);
 
     @Around("@annotation(sysLog)")
     public Object around(ProceedingJoinPoint joinPoint, com.example.springquickdemo.annotation.SysLog sysLog) throws Throwable {
@@ -33,7 +35,6 @@ public class SysLogAspect {
         Object result = joinPoint.proceed();
         //执行时长(毫秒)
         long time = SystemClock.now() - beginTime;
-
 
         SysLog sysLogEntity = new SysLog();
         if (sysLog != null) {
@@ -63,7 +64,7 @@ public class SysLogAspect {
         //保存系统日志
         //sysLogService.save(sysLogEntity);
 
-        System.out.println("@Around sysLogEntity = " + sysLogEntity);
+        log.info("@Around sysLogEntity = " + sysLogEntity);
         return result;
     }
 
