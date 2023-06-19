@@ -49,7 +49,7 @@ public class SysLogAspect {
 
         //请求的参数
         Object[] args = joinPoint.getArgs();
-        String params = Json.toJsonString(args[0]);
+        String params = Json.toJsonString(args);
         sysLogEntity.setParams(params);
 
         //设置IP地址
