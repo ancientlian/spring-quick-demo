@@ -13,6 +13,7 @@ import java.util.Date;
 
 /**
  * 系统日志
+ * @author lian
  */
 @Data
 public class SysLog implements Serializable {
