@@ -17,6 +17,8 @@ class SpringQuickDemoApplicationTests {
         sysLog.setCreateDate(new Date());
         SysLogVO sysLogVO = DateTestConvert.INSTANCE.dataConvert(sysLog);
         System.out.println("sysLogVO = " + sysLogVO);
+        SysLogVO sysLogVO2 = DateTestConvert.INSTANCE.dataExpressionConvert(sysLog);
+        System.out.println("sysLogVO2 = " + sysLogVO2);
     }
 
 }
