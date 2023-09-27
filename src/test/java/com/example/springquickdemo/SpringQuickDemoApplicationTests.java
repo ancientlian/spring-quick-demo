@@ -19,6 +19,10 @@ class SpringQuickDemoApplicationTests {
         System.out.println("sysLogVO = " + sysLogVO);
         SysLogVO sysLogVO2 = DateTestConvert.INSTANCE.dataExpressionConvert(sysLog);
         System.out.println("sysLogVO2 = " + sysLogVO2);
+
+
+        String os = System.getProperty("os.name");
+        System.out.println("os = " + os);
     }
 
 }
