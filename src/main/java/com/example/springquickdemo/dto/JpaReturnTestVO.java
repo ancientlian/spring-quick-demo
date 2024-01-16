@@ -7,4 +7,6 @@ public interface JpaReturnTestVO {
 
     String getFirstname();
     String getLastname();
+
+    String getName();
 }
