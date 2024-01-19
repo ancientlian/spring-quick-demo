@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lian
@@ -22,5 +23,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query(nativeQuery = true, value =
             "select p.firstname as firstname, p.lastname as lastname, p.name as name from person p where p.name = ?1 order by p.id")
     List<JpaReturnTestVO> findAllByName2(String name);
+
+    @Query("select p.firstname as firstname, p.lastname as lastname, p.name as name from Person p where p.name = ?1 order by p.id")
+    List<Map<String, Object>> findAllByName3(String name);
 
 }
