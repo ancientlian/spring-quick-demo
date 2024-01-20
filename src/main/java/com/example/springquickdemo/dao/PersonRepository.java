@@ -29,10 +29,15 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     @Query("select p.firstname as firstname, p.lastname as lastname, p.name as name from Person p where p.name = ?1 order by p.id")
     List<Map<String, Object>> findAllByName3(String name);
+    @Query("select p.firstname, p.lastname, p.name from Person p where p.name = ?1 order by p.id")
+    List<Object[]> findAllByName4(String name);
 
+    /**
+     * 泛型动态查询投影
+     */
     <T> Optional<T> findById(long id, Class<T> type);
 
-    @Query("select new com.example.springquickdemo.dto.PersonDTO(name, firstname, lastname) from Person p where p.firstname = ?1 order by p.id")
+    @Query("select new com.example.springquickdemo.dto.PersonDTO(p.name, p.firstname, p.lastname) from Person p where p.firstname = ?1 order by p.id")
     List<PersonDTO> findByFirstname(String firstname);
 
 }

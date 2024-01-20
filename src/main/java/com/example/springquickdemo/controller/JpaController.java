@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author lian
@@ -64,8 +61,15 @@ public class JpaController {
                 System.out.println("entry.getValue() = " + entry.getValue());
             }
         }
+        List<Object[]> byName4 = personRepository.findAllByName4("poi");
+        // 想找到对应的 key 就需要数对应的key
+        for (Object[] objects : byName4) {
+            System.out.println("objects = " + Arrays.toString(objects));
+        }
+
 
         // 使用 DTO 接收
+        // 泛型动态查询投影
         Optional<PersonDTO> dto = personRepository.findById(1, PersonDTO.class);
         if (dto.isPresent()) {
             System.out.println("dto = " + dto);
