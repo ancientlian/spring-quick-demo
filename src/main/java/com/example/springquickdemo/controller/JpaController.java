@@ -2,8 +2,10 @@ package com.example.springquickdemo.controller;
 
 import com.example.springquickdemo.dao.PersonRepository;
 import com.example.springquickdemo.dto.JpaReturnTestVO;
+import com.example.springquickdemo.dto.PersonDTO;
 import com.example.springquickdemo.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author lian
@@ -36,7 +39,7 @@ public class JpaController {
         }
 
         // 必须要有 alias
-        List<JpaReturnTestVO> list = personRepository.findAllByName("poi");
+        List<JpaReturnTestVO> list = personRepository.findAllByName("poi", PageRequest.of(0, 10));
         for (JpaReturnTestVO vo : list) {
             System.out.println("vo.getName() = " + vo.getName());
             System.out.println("vo.getFirstname() = " + vo.getFirstname());
@@ -60,6 +63,22 @@ public class JpaController {
                 System.out.println("entry.getKey() = " + entry.getKey());
                 System.out.println("entry.getValue() = " + entry.getValue());
             }
+        }
+
+        // 使用 DTO 接收
+        Optional<PersonDTO> dto = personRepository.findById(1, PersonDTO.class);
+        if (dto.isPresent()) {
+            System.out.println("dto = " + dto);
+        }
+        /*
+         * 当返回对象为实体类中的某几个属性时，字段名和实体类必须保持一致。否则无法映射
+         * 如果实体类中的属性名为驼峰例如：userName，映射到数据库则为user_name
+         * 使用全限定类名com.kxj.jpa.dto.UserDTO，必须有new关键字
+         * 实体类必须定义别名
+         */
+        List<PersonDTO> dtos = personRepository.findByFirstname("123");
+        for (PersonDTO personDTO : dtos) {
+            System.out.println("personDTO = " + personDTO);
         }
 
 
